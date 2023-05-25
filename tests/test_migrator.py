@@ -52,6 +52,27 @@ class TestMigrator(unittest.TestCase):
                 from table2
         """
 
+        cls.expected_table_data = [
+            {
+                'id': 1,
+                'value': 2.3,
+                'bool_value': 1,
+                'str_value': 'comment1'
+            },
+            {
+                'id': 2,
+                'value': 4.5,
+                'bool_value': 0,
+                'str_value': 'comment2'
+            },
+            {
+                'id': 3,
+                'value': 6.7,
+                'bool_value': 1,
+                'str_value': 'comment3'
+            }
+        ]
+
     @classmethod
     def tearDownClass(cls) -> None:
         cls.client.disconnect()
@@ -95,28 +116,36 @@ class TestMigrator(unittest.TestCase):
                 'success': True
             }
         ]
-        expected_table_data = [
+        self.assertListEqual(sorted_history, expected_history)
+        self.assertListEqual(sorted_table1_data, self.expected_table_data)
+        self.assertListEqual(table2_data, [])
+
+    def test_migrate_with_some_scripts_in_one_migration_file(self):
+        self.migrator.migrations_dir = Path("./some_scripts_in_one_migration_file/")
+        self.migrator.migrate()
+
+        history = self.execute_script(self.history_script)
+        table1_data = self.execute_script(self.table1_script)
+        table2_data = self.execute_script(self.table2_script)
+        sorted_history = sorted(history, key=lambda d: d["version"])
+        sorted_table1_data = sorted(table1_data, key=lambda d: d["id"])
+
+        expected_history = [
             {
-                'id': 1,
-                'value': 2.3,
-                'bool_value': 1,
-                'str_value': 'comment1'
+                'version': 1,
+                'file_name': '001.create_and_insert.default.table1.sql',
+                'checksum': '2ce3555d8210ba604b85a41bf9446d5d',
+                'success': True
             },
             {
-                'id': 2,
-                'value': 4.5,
-                'bool_value': 0,
-                'str_value': 'comment2'
-            },
-            {
-                'id': 3,
-                'value': 6.7,
-                'bool_value': 1,
-                'str_value': 'comment3'
+                'version': 2,
+                'file_name': '002.create.default.table2.sql',
+                'checksum': '90cfb131c0a9b98bf8b597e323eacd85',
+                'success': True
             }
         ]
         self.assertListEqual(sorted_history, expected_history)
-        self.assertListEqual(sorted_table1_data, expected_table_data)
+        self.assertListEqual(sorted_table1_data, self.expected_table_data)
         self.assertListEqual(table2_data, [])
 
 
