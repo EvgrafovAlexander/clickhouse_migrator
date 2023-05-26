@@ -163,6 +163,7 @@ class Migrator:
             for script in scripts:
                 self.connection.execute(script)
             success = True
+            self.applied_migrations[version] = {"file_name": filename, "checksum": checksum, "success": success}
         except Exception as err:
             success = False
             raise Exception(
