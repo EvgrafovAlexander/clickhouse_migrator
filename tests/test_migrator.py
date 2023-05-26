@@ -54,22 +54,22 @@ class TestMigrator(unittest.TestCase):
 
         cls.expected_table_data = [
             {
-                'id': 1,
-                'value': 2.3,
-                'bool_value': 1,
-                'str_value': 'comment1'
+                "id": 1,
+                "value": 2.3,
+                "bool_value": 1,
+                "str_value": "comment1"
             },
             {
-                'id': 2,
-                'value': 4.5,
-                'bool_value': 0,
-                'str_value': 'comment2'
+                "id": 2,
+                "value": 4.5,
+                "bool_value": 0,
+                "str_value": "comment2"
             },
             {
-                'id': 3,
-                'value': 6.7,
-                'bool_value': 1,
-                'str_value': 'comment3'
+                "id": 3,
+                "value": 6.7,
+                "bool_value": 1,
+                "str_value": "comment3"
             }
         ]
 
@@ -98,22 +98,22 @@ class TestMigrator(unittest.TestCase):
 
         expected_history = [
             {
-                'version': 1,
-                'file_name': '001.create.default.table1.sql',
-                'checksum': 'd18349d55813148857afb191d85b7350',
-                'success': True
+                "version": 1,
+                "file_name": "001.create.default.table1.sql",
+                "checksum": "d18349d55813148857afb191d85b7350",
+                "success": True
             },
             {
-                'version': 2,
-                'file_name': '002.insert.default.table1.sql',
-                'checksum': 'dec826b82a1960265a8091eaa4448069',
-                'success': True
+                "version": 2,
+                "file_name": "002.insert.default.table1.sql",
+                "checksum": "dec826b82a1960265a8091eaa4448069",
+                "success": True
             },
             {
-                'version': 3,
-                'file_name': '003.create.default.table2.sql',
-                'checksum': '90cfb131c0a9b98bf8b597e323eacd85',
-                'success': True
+                "version": 3,
+                "file_name": "003.create.default.table2.sql",
+                "checksum": "90cfb131c0a9b98bf8b597e323eacd85",
+                "success": True
             }
         ]
         self.assertListEqual(sorted_history, expected_history)
@@ -132,16 +132,16 @@ class TestMigrator(unittest.TestCase):
 
         expected_history = [
             {
-                'version': 1,
-                'file_name': '001.create_and_insert.default.table1.sql',
-                'checksum': '2ce3555d8210ba604b85a41bf9446d5d',
-                'success': True
+                "version": 1,
+                "file_name": "001.create_and_insert.default.table1.sql",
+                "checksum": "2ce3555d8210ba604b85a41bf9446d5d",
+                "success": True
             },
             {
-                'version': 2,
-                'file_name': '002.create.default.table2.sql',
-                'checksum': '90cfb131c0a9b98bf8b597e323eacd85',
-                'success': True
+                "version": 2,
+                "file_name": "002.create.default.table2.sql",
+                "checksum": "90cfb131c0a9b98bf8b597e323eacd85",
+                "success": True
             }
         ]
         self.assertListEqual(sorted_history, expected_history)
@@ -153,5 +153,5 @@ class TestMigrator(unittest.TestCase):
         self.assertRaises(AssertionError, self.migrator.migrate)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
