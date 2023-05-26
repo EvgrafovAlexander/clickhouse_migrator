@@ -85,6 +85,8 @@ class Migrator:
         """Gets a list of migrations from the 'migrations_dir' directory"""
         migrations = []
         for f in os.scandir(f"{self.migrations_dir}"):
+            if not f.name.endswith(".sql"):
+                continue
             content = pathlib.Path(f"{self.migrations_dir}/{f.name}").read_bytes()
             checksum = hashlib.md5(content).hexdigest()
             content = content.decode(encoding="utf-8")
