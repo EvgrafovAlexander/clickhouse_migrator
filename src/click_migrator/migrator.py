@@ -1,5 +1,6 @@
 # stdlib
 import hashlib
+import logging
 import os
 import pathlib
 from typing import List
@@ -144,6 +145,7 @@ class Migrator:
                 continue
             else:
                 raise AssertionError(f"Error: retrying to apply migrations {filename}, checksum does not match")
+        logging.info("Migrations completed")
 
     def _is_already_applied(self, version: int) -> bool:
         """Indicates if the migration script is previously applied"""
