@@ -148,6 +148,11 @@ class TestMigrator(unittest.TestCase):
         self.assertListEqual(sorted_table1_data, self.expected_table_data)
         self.assertListEqual(table2_data, [])
 
+    # def test_migrate_with_same_version(self):
+    #     self.migrator.migrations_dir = Path("./migrations_with_same_version/")
+    #     self.migrator.migrate()
+    #     print()
+
 
 if __name__ == '__main__':
     unittest.main()
