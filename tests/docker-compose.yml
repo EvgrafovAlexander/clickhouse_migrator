@@ -8,11 +8,4 @@ services:
       - "9000:9000"
       - "8999:8999"
     volumes:
-      - ./dbfiles:/var/lib/clickhouse
-
-  click_client:
-    image: yandex/clickhouse-client
-    entrypoint:
-      - /bin/sleep
-    command:
-      - infinity
+      - ../dbfiles:/var/lib/clickhouse
