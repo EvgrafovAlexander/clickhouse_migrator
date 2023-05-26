@@ -12,11 +12,11 @@ class Migrator:
     """
     Script Migrator for ClickHouse Database
 
+    :param migrations_dir: Directory with sql migration files
     :param db_host: Database host
     :param db_name: Database name
     :param db_user: Database user
     :param db_password: Database user password
-    :param migrations_dir: Directory with sql migration files
     :param db_port: Database port (default: 8999)
     :param create_db_if_not_exists: Flag to create a database 'db_name',
                                     if it does not exist (default: True)
@@ -24,20 +24,20 @@ class Migrator:
 
     def __init__(
         self,
-        db_host: str,
-        db_name: str,
-        db_user: str,
-        db_password: str,
         migrations_dir: pathlib.Path,
+        db_host: str = "localhost",
+        db_name: str = "default",
+        db_user: str = "default",
+        db_password: str = "",
         db_port: int = 8999,
         create_db_if_not_exists: bool = True,
     ):
+        self.migrations_dir = migrations_dir
         self.db_host = db_host
         self.db_port = db_port
         self.db_name = db_name
         self.db_user = db_user
         self.db_pass = db_password
-        self.migrations_dir = migrations_dir
         self.create_db_if_not_exists = create_db_if_not_exists
 
     def migrate(self):

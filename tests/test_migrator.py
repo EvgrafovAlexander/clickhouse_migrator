@@ -22,7 +22,7 @@ class TestMigrator(unittest.TestCase):
         migrations_dir = Path("")
         db_port = 9000
 
-        cls.migrator = Migrator(db_host, db_name, db_user, db_password, migrations_dir, db_port)
+        cls.migrator = Migrator(migrations_dir, db_host, db_name, db_user, db_password, db_port)
         cls.client = Client(db_host, port=db_port, user=db_user, password=db_password, database=db_name)
 
         cls.history_script = """
